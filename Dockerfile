@@ -16,6 +16,7 @@ RUN groupadd -g 1000 app \
 WORKDIR /app
 COPY . /app/
 
-ENTRYPOINT python main.py input.xlsx
+CMD /bin/bash
 
-# docker run <id> -it -v <source>:/app
+# docker run -it -v <source>:<target> <containerID>
+# python main.py <inputFile>

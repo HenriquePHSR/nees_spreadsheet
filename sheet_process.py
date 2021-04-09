@@ -33,8 +33,11 @@ def autocomplete(str, lenght, char, mode):
     return str
 
 def build_df(args):
-    df_in = pd.read_excel(args[0])
-
+    if (len(args)!=0):
+        df_in = pd.read_excel(args[0])
+    else:
+        f_name = input()
+        df_in = pd.read_excel(f_name)
     
     cursos = sorted(df_in.Curso.unique())
     if (len(cursos) < 11):
@@ -76,9 +79,12 @@ def build_df(args):
 
     ''' NOT VALIDE CPFs '''
     df_out_cpf_rejected = df_out[df_out['CPF'].apply(lambda x: not validate(str(x)))]
-    
-    df_out_final.to_csv('ouput_df.csv')
-    df_out_cpf_rejected.to_csv('output_df_cpf_rejected.csv')
+    if not os.path.exists('output'):
+        os.mkdir('output')
+    df_out_final.to_excel('output/ouput_df.xlsx')
+    print('output file: ouput_df.xlsx')
+    df_out_cpf_rejected.to_excel('output/output_df_cpf_rejected.xlsx')
+    print('output file: output_df_cpf_rejected.xlsx')
 
     return df_out_final, df_out_cpf_rejected
 

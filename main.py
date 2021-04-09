@@ -10,6 +10,9 @@ import sheet_process as sp
 # wb.Close()                               #FileFormat = 56 is for .xls extension
 # excel.Application.Quit()
 
+
+# python main.py input.xlsx
+print("init: args file "+str(sys.argv[1:]))
 sp.build_df(sys.argv[1:])
 
 #sp.dispatch_email_from_df(sys.argv[1:])
